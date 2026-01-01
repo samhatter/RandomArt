@@ -11,26 +11,21 @@
     <h1>Random Art Generator</h1>
     
     <div class="control-group">
-      <label for="depth">Tree Depth <span class="range-value" id="depth-value">3</span></label>
-      <input type="range" id="depth" min="1" max="8" value="3">
+      <label for="config">Configuration (JavaScript)</label>
+      <textarea id="config" spellcheck="false"></textarea>
     </div>
 
-    <div class="control-group">
-      <label for="max-children">Max Children <span class="range-value" id="max-children-value">2</span></label>
-      <input type="range" id="max-children" min="2" max="5" value="2">
-    </div>
-
-    <div class="control-group">
-      <label for="child-prob">Child Probability <span class="range-value" id="child-prob-value">0.5</span></label>
-      <input type="range" id="child-prob" min="0" max="1" step="0.1" value="0.5">
-    </div>
-
-    <button id="regenerate">Generate New Art</button>
+    <button id="regenerate">Generate</button>
     <button id="save">Save as Image</button>
 
+    <div class="expression-display">
+      <h3>Generated Expression:</h3>
+      <div id="expression"></div>
+    </div>
+
     <div class="info">
-      <p>Click anywhere to regenerate art with current settings.</p>
-      <p>Adjust parameters and click "Generate New Art" to see changes.</p>
+      <p>Edit the configuration above and click Generate.</p>
+      <p>Modify functions, probabilities, depth, etc.</p>
     </div>
   </div>
 

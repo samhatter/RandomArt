@@ -132,7 +132,8 @@ const RandomArt = (canvasElement, config) => {
     const imageData = ctx.createImageData(clientWidth * scaleFactor, clientHeight * scaleFactor);
     const data = imageData.data;
     const tree = randomEvalFunc(config);
-    console.log(printTree(tree));
+    const expression = printTree(tree);
+    console.log(expression);
     
     for (let y = 0; y < clientHeight * scaleFactor; y++) {
       for (let x = 0; x < clientWidth * scaleFactor; x++) {
@@ -151,6 +152,7 @@ const RandomArt = (canvasElement, config) => {
     }
     
     ctx.putImageData(imageData, 0, 0);
+    return expression;
   };
 
   /**
@@ -163,22 +165,23 @@ const RandomArt = (canvasElement, config) => {
     const scaleFactor = window.devicePixelRatio || 1;
     
     if (!ctx) {
-      return;
+      return null;
     }
     
     canvas.width = canvas.offsetWidth * scaleFactor;
     canvas.height = canvas.offsetHeight * scaleFactor;
     ctx.scale(scaleFactor, scaleFactor);
     const { clientWidth, clientHeight } = canvas;
-    generateArt(config, ctx, clientWidth, clientHeight, scaleFactor);
+    return generateArt(config, ctx, clientWidth, clientHeight, scaleFactor);
   };
 
   if (!canvasElement) {
     console.error('Canvas element not found');
-    return;
+    return { cleanup: () => {}, expression: null };
   }
 
-  drawArt(canvasElement, config);
+  const expression = drawArt(canvasElement, config);
+  return { cleanup: () => {}, expression };
 };
 
 export default RandomArt;
